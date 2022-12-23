@@ -1,50 +1,126 @@
+import Transport.Bus;
+import Transport.Car;
+
 public class Main {
     public static void main(String[] args) {
 
-        Car car = new Car();
-        car.brand = "Lada";
-        car.model = "Granta";
-        car.engineVolume = 1.7;
-        car.color = "Желтый";
-        car.year = 2015;
-        car.country = "Россия";
-        car.information();
+        Car lada = new Car(
+                "Lada",
+                "Granta",
+                1.7,
+                "Желтый",
+                2005 ,
+                "Россия"
+        );
+        lada.setRegistrationNumber("в987ау195");
 
-        Car car1 = new Car();
-        car1.brand = "Audi";
-        car1.model = "А8";
-        car1.engineVolume = 3.0;
-        car1.color = "Черный";
-        car1.year = 2020;
-        car1.country = "Германия";
-        car1.information();
 
-        Car car2 = new Car();
-        car2.brand = "BMW";
-        car2.model = "Z8";
-        car2.engineVolume = 3.0;
-        car2.color = "Черный";
-        car2.year = 2021;
-        car2.country = "Германия";
-        car2.information();
 
-        Car car3 = new Car();
-        car3.brand = "Kia";
-        car3.model = "Sportage 4-го поколения";
-        car3.engineVolume = 2.4;
-        car3.color = "Красный";
-        car3.year = 2018;
-        car3.country = "Южная Корея";
-        car3.information();
+        Car audi = new Car(
+                "Audi",
+                "A8",
+                3.0,
+                "Черный",
+                2020,
+                "Германия"
+        );
+        audi.setTransmission("автомат");
 
-        Car car4 = new Car();
-        car4.brand = "Hyundai";
-        car4.model = "Avante";
-        car4.engineVolume = 1.6;
-        car4.color = "Оранжевый";
-        car4.year = 2016;
-        car4.country = "Южная Корея";
-        car4.information();
+        Car bmw = new Car(
+                "BMW",
+                "Z8",
+                3.0,
+                "Черный",
+                2021,
+                "Германия"
+        );
+        bmw.setTypeOfRubber(false);
 
+
+        Car kia = new Car(
+                "Kia",
+                "Sportage 4-го поколения",
+                2.4,
+                "Красный",
+                2018,
+                "Южная Корея"
+        );
+
+
+        Car hyundai = new Car(
+                "Hyundai",
+                "Avante",
+                1.6,
+                "Оранжевый",
+                2016,
+                "Южная Корея");
+
+
+        Bus ikarus = new Bus(
+                "Икарус",
+                "Z50",
+                2007,
+                "Венгрия",
+                "Красный",
+                90
+        );
+
+        Bus liaz = new Bus(
+                "Лиаз",
+                "Гармошка",
+                2000,
+                "Россия",
+                "Синий",
+                60
+        );
+
+        Bus man = new Bus(
+                "Man",
+                "А24",
+                2010,
+                "Германия",
+                "Белый",
+                110
+        );
+
+
+        printInfo(lada);
+        printInfo(audi);
+        printInfo(bmw);
+        printInfo(kia);
+        printInfo(hyundai);
+        printBusInfo(ikarus);
+        printBusInfo(liaz);
+        printBusInfo(man);
+
+
+    }
+
+    private static void printInfo(Car car) {
+        System.out.println(car.getBrand() + " " + car.getModel() +
+                ", год выпуска: " +  car.getYear() +
+                ", страна сборки: " + car.getCountry() +
+                ", цвет кузова: " + car.getColor() +
+                ", объем двигателя: " + car.getEngineVolume() +
+                ", коробка передач: " + car.getTransmission() +
+                ", типа кузова: " + car.getBodyType() +
+                ", рег.номер " + car.getRegistrationNumber() +
+                ", кол-во мест: " + car.getNumberOfSeat() +
+                ", " + (car.getKey().isWithoutKeyAccess() ? " безключевой доступ" : "безключевой доступ") +
+                ", "+(car.getKey().isRemoteRunEngine() ? "удаленный доступ " : "Обычный запуск") +
+                ", номер страховки: " + car.getInsurance().getNumber() +
+                ", стоимость страховки: " + car.getInsurance().getCost() +
+                ", срок действия страховки " + car.getInsurance().getExpireDate()
+        );
+    }
+
+    private static void printBusInfo(Bus bus) {
+        System.out.println(bus.getBrand() + " " + bus.getModel() +
+                ", год выпуска: " + bus.getYear() +
+                ", цвет кузова: " + bus.getColor() +
+                ", страна сборки: " + bus.getCountry() +
+                ", цвет кузова: " + bus.getColor() +
+                ", максимальная скорость: " + bus.getMaxSpeed()
+        );
     }
 }
