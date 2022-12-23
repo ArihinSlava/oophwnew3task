@@ -2,15 +2,9 @@ package Transport;
 
 import java.time.LocalDate;
 
-public class Car {
+public class Car extends Transport{
 
-
-    private final String brand;
-    private final String model;
     private double engineVolume;
-    private String color;
-    private final int year;
-    private final String country;
     private String transmission;
     private final String bodyType;
     private String registrationNumber;
@@ -32,25 +26,9 @@ public class Car {
                boolean typeOfRubber,
                Key key,
                Insurance insurance) {
-        if (brand == null || brand.isBlank()) {
-            this.brand = "Default";
-        } else
-            this.brand = brand;
 
-        if (model == null || model.isBlank()) {
-            this.model = "Default";
-        } else
-            this.model = model;
+        super(brand, model, year, country, color);
 
-        if (color == null || color.isBlank()) {
-            this.color = "Белый";
-        } else
-            this.color = color;
-
-        if (country == null || country.isBlank()) {
-            this.country = "Default";
-        } else
-            this.country = country;
 
         if (transmission == null) {
             this.transmission = "ММКП";
@@ -77,7 +55,6 @@ public class Car {
         }else
             this.insurance = insurance;
 
-        this.year = year;
         this.engineVolume = engineVolume;
         this.numberOfSeat =numberOfSeat;
         this.typeOfRubber = typeOfRubber;
@@ -106,23 +83,6 @@ public class Car {
         );
     }
 
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
     public String getBodyType() {
         return bodyType;
     }
@@ -137,14 +97,6 @@ public class Car {
 
     public double getEngineVolume() {
         return engineVolume;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public String getTransmission() {

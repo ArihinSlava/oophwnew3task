@@ -1,3 +1,4 @@
+import Transport.Bus;
 import Transport.Car;
 
 public class Main {
@@ -54,11 +55,43 @@ public class Main {
                 2016,
                 "Южная Корея");
 
+
+        Bus ikarus = new Bus(
+                "Икарус",
+                "Z50",
+                2007,
+                "Венгрия",
+                "Красный",
+                90
+        );
+
+        Bus liaz = new Bus(
+                "Лиаз",
+                "Гармошка",
+                2000,
+                "Россия",
+                "Синий",
+                60
+        );
+
+        Bus man = new Bus(
+                "Man",
+                "А24",
+                2010,
+                "Германия",
+                "Белый",
+                110
+        );
+
+
         printInfo(lada);
         printInfo(audi);
         printInfo(bmw);
         printInfo(kia);
         printInfo(hyundai);
+        printBusInfo(ikarus);
+        printBusInfo(liaz);
+        printBusInfo(man);
 
 
     }
@@ -78,6 +111,16 @@ public class Main {
                 ", номер страховки: " + car.getInsurance().getNumber() +
                 ", стоимость страховки: " + car.getInsurance().getCost() +
                 ", срок действия страховки " + car.getInsurance().getExpireDate()
+        );
+    }
+
+    private static void printBusInfo(Bus bus) {
+        System.out.println(bus.getBrand() + " " + bus.getModel() +
+                ", год выпуска: " + bus.getYear() +
+                ", цвет кузова: " + bus.getColor() +
+                ", страна сборки: " + bus.getCountry() +
+                ", цвет кузова: " + bus.getColor() +
+                ", максимальная скорость: " + bus.getMaxSpeed()
         );
     }
 }
