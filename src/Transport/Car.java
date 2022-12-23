@@ -1,82 +1,37 @@
 package Transport;
 
+import java.time.LocalDate;
+
 public class Car {
 
-    private static class Key {
 
-        private final boolean remoteStart;
-        private final boolean notKeyAccess;
+    private final String brand;
+    private final String model;
+    private double engineVolume;
+    private String color;
+    private final int year;
+    private final String country;
+    private String transmission;
+    private final String bodyType;
+    private String registrationNumber;
+    private final int numberOfSeat;
+    private boolean typeOfRubber;
+    private Key key;
+    private Insurance insurance;
 
-        public Key(boolean remoteStart, boolean notKeyAccess) {
-            this.remoteStart = remoteStart;
-            this.notKeyAccess = notKeyAccess;
-        }
-
-        public Key() {
-            this(false, false);
-        }
-
-        public boolean isRemoteStart() {
-            return remoteStart;
-        }
-
-        public boolean isNotKeyAccess() {
-            return notKeyAccess;
-        }
-    }
-
-     String brand;
-     String model;
-    double engineVolume;
-    String color;
-     int year;
-     String country;
-    String transmission;
-    String bodyType;
-    String registrationNumber;
-    int numberOfSeat;
-    boolean typeOfRubber;
-     String seasonsType;
-
-
-
-
-
-
-    public Car(String brand, String model, double engineVolume, String color,
-                    int year, String country, String transmission, String bodyType,
-                    String registrationNumber, int numberOfSeat, boolean typeOfRubber) {
-
-        this.typeOfRubber = typeOfRubber;
-
-        if (typeOfRubber) {
-            this.seasonsType = "Летняя";
-        } else
-            this.seasonsType = "Зимняя";
-
-        if (transmission == null || transmission.isBlank() || transmission.isEmpty()) {
-            this.transmission = "Default";
-        } else
-            this.transmission = transmission;
-
-
-        if (bodyType == null || bodyType.isBlank() || bodyType.isEmpty()) {
-            this.bodyType = "Default";
-        } else
-            this.bodyType = bodyType;
-
-
-        if (registrationNumber == null || registrationNumber.isBlank() || registrationNumber.isEmpty()) {
-            this.registrationNumber = "Default";
-        } else
-            this.registrationNumber = registrationNumber;
-
-        if (numberOfSeat < 0) {
-            this.numberOfSeat = numberOfSeat;
-        } else
-            this.numberOfSeat = Math.abs(numberOfSeat);
-
-
+    public Car(String brand,
+               String model,
+               double engineVolume,
+               String color,
+               int year,
+               String country,
+               String transmission,
+               String bodyType,
+               String registrationNumber,
+               int numberOfSeat,
+               boolean typeOfRubber,
+               Key key,
+               Insurance insurance) {
         if (brand == null || brand.isBlank()) {
             this.brand = "Default";
         } else
@@ -87,38 +42,70 @@ public class Car {
         } else
             this.model = model;
 
-
-        if (engineVolume <= 0) {
-            this.engineVolume = 1.5;
-        } else
-            this.engineVolume = Math.abs(engineVolume);
-
-
         if (color == null || color.isBlank()) {
             this.color = "Белый";
         } else
             this.color = color;
 
-
-        if (year <= 0) {
-            this.year = 2000;
-        } else
-            this.year = Math.abs(year);
-
-
         if (country == null || country.isBlank()) {
             this.country = "Default";
         } else
             this.country = country;
+
+        if (transmission == null) {
+            this.transmission = "ММКП";
+        } else
+            this.transmission = transmission;
+
+        if (registrationNumber == null) {
+            this.registrationNumber = "х000хх000";
+        } else
+            this.registrationNumber = registrationNumber;
+
+        if (bodyType == null) {
+            this.bodyType = "Седан";
+        } else
+            this.bodyType = bodyType;
+
+        if (key == null) {
+            this.key = new Key();
+        }else
+            this.key = key;
+
+        if (insurance == null) {
+            this.insurance = new Insurance();
+        }else
+            this.insurance = insurance;
+
+        this.year = year;
+        this.engineVolume = engineVolume;
+        this.numberOfSeat =numberOfSeat;
+        this.typeOfRubber = typeOfRubber;
     }
 
-
-    public void information() {
-        System.out.println(getBrand() + " " + getModel() + ". " + getYear() +
-                " год выпуска , сборка " + getCountry() + ". " + getColor() + " цвет кузова , объем двигателя - " +
-                getEngineVolume() + "л. Коробка передач - " + getTransmission() + ". Тип кузова - " + getBodyType() + " Регистрационный номер - " +
-                getRegistrationNumber() + " Количества мест - " + getNumberOfSeat() + ". Тип резины - " + seasonsType);
+    public Car(String brand,
+               String model,
+               double engineVolume,
+               String color,
+               int year,
+               String country) {
+        this(
+                brand,
+                model,
+                engineVolume,
+                color,
+                year,
+                country,
+                "ММКП",
+                "Седан",
+                "х000хх000",
+                5,
+                true,
+                new Key(),
+                new Insurance()
+        );
     }
+
 
     public String getBrand() {
         return brand;
@@ -144,10 +131,6 @@ public class Car {
         return numberOfSeat;
     }
 
-    public void setNumberOfSeat(int numberOfSeat) {
-        this.numberOfSeat = numberOfSeat;
-    }
-
     public void setEngineVolume(double engineVolume) {
         this.engineVolume = engineVolume;
     }
@@ -169,34 +152,138 @@ public class Car {
     }
 
     public void setTransmission(String transmission) {
-        this.transmission = transmission;
+        if (transmission == null) {
+            this.transmission = "ММКП";
+        }else
+            this.transmission = transmission;
     }
 
     public String getRegistrationNumber() {
         return registrationNumber;
     }
 
-    public boolean isTypeOfRubber() {
-        return typeOfRubber;
+    public void setRegistrationNumber(String registrationNumber) {
+        if (registrationNumber == null) {
+            this.registrationNumber = "х000хх000";
+        }else
+            this.registrationNumber = registrationNumber;
     }
 
     public void setTypeOfRubber(boolean typeOfRubber) {
         this.typeOfRubber = typeOfRubber;
     }
 
+    public void changeTyres() {
+        typeOfRubber = !typeOfRubber;
+    }
+
+    public Key getKey() {
+        return key;
+    }
+
+    public void setKey(Key key) {
+        this.key = key;
+    }
+
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
+    public void setInsurance(Insurance insurance) {
+        this.insurance = insurance;
+    }
+
     public boolean isCorrectRegNumber() {
-        if (registrationNumber.length() != 0) {
+        if (registrationNumber.length() != 9) {
             return false;
         }
         char[] chars = registrationNumber.toCharArray();
         if (!Character.isAlphabetic(chars[0]) || !Character.isAlphabetic(chars[4]) || !Character.isAlphabetic(chars[5])) {
             return false;
         }
-        return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3]) &&
-                Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[8]);
+        return Character.isDigit(chars[1]) && Character.isDigit(chars[2]) && Character.isDigit(chars[3])
+                && Character.isDigit(chars[6]) && Character.isDigit(chars[7]) && Character.isDigit(chars[7]);
+
+    }
+
+    public static class Key {
+
+        private final boolean remoteRunEngine;
+        private final boolean withoutKeyAccess;
+
+        public Key(boolean remoteRunEngine, boolean withoutKeyAccess) {
+            this.remoteRunEngine = remoteRunEngine;
+            this.withoutKeyAccess = withoutKeyAccess;
+        }
+        public Key() {
+            this(false, false);
+        }
+
+        public boolean isRemoteRunEngine() {
+            return remoteRunEngine;
+        }
+
+        public boolean isWithoutKeyAccess() {
+            return withoutKeyAccess;
+        }
+
+    }
+
+    public static class Insurance {
+
+        private final LocalDate expireDate;
+        private final double cost;
+        private final String number;
+
+        public Insurance(LocalDate expireDate, double cost, String number) {
+            if (expireDate == null) {
+                this.expireDate = LocalDate.now().plusDays(365);
+            } else {
+                this.expireDate = expireDate;
+            }
+            this.cost = cost;
+            if (number == null) {
+                this.number = "123456789";
+            } else {
+                this.number = number;
+            }
+        }
+
+        public Insurance() {
+            this(null, 10_000, null);
+        }
+
+        public LocalDate getExpireDate() {
+            return expireDate;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public String getNumber() {
+            return number;
+        }
+
+        public void checkExpireDate() {
+            if (expireDate.isBefore(LocalDate.now()) || expireDate.isEqual(LocalDate.now())) {
+                System.out.println("Нужно срочно ехать оформлять страховку");
+            }
+        }
+
+        public void checkNumber() {
+            if (number.length() != 9) {
+                System.out.println("Номер страховки некорректный!");
+            }
+        }
+
+        }
     }
 
 
-}
+
+
+
+
 
 
